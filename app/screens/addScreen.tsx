@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from 'expo-router';
+// @ts-ignore
+import { useRouter } from 'expo-router'; 
+
+interface Carro {
+    marca: string;
+    modelo: string;
+    ano: number;
+    cor: string;
+    quilometros: number;
+}
 
 export default function AddScreen() {
     console.log('AddScreen Loaded');
@@ -20,7 +29,7 @@ export default function AddScreen() {
             return;
         }
 
-        const newCar = {
+        const newCar: Carro = {
             marca,
             modelo,
             ano: parseInt(ano),
@@ -30,7 +39,7 @@ export default function AddScreen() {
 
         try {
             const storedCars = await AsyncStorage.getItem('carros');
-            let carros = storedCars ? JSON.parse(storedCars) : {};
+            let carros: { [key: string]: Carro } = storedCars ? JSON.parse(storedCars) : {}; // Tipagem explícita
 
             carros[matricula] = newCar;
 
@@ -54,12 +63,50 @@ export default function AddScreen() {
         <View style={styles.container}>
             <Text style={styles.title}>Adicionar veículo</Text>
 
-            <TextInput style={styles.input} placeholder='Matrícula (XX-XX-XX)' placeholderTextColor='#cccccc' value={matricula} onChangeText={setMatricula} />
-            <TextInput style={styles.input} placeholder='Marca' placeholderTextColor='#cccccc' value={marca} onChangeText={setMarca} />
-            <TextInput style={styles.input} placeholder='Modelo' placeholderTextColor='#cccccc' value={modelo} onChangeText={setModelo} />
-            <TextInput style={styles.input} placeholder='Ano' placeholderTextColor='#cccccc' keyboardType="numeric" value={ano} onChangeText={setAno} />
-            <TextInput style={styles.input} placeholder='Cor' placeholderTextColor='#cccccc' value={cor} onChangeText={setCor} />
-            <TextInput style={styles.input} placeholder='Quilómetros' placeholderTextColor='#cccccc' keyboardType="numeric" value={quilometros} onChangeText={setQuilometros} />
+            <TextInput
+                style={styles.input}
+                placeholder='Matrícula (XX-XX-XX)'
+                placeholderTextColor='#cccccc'
+                value={matricula}
+                onChangeText={setMatricula}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Marca'
+                placeholderTextColor='#cccccc'
+                value={marca}
+                onChangeText={setMarca}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Modelo'
+                placeholderTextColor='#cccccc'
+                value={modelo}
+                onChangeText={setModelo}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Ano'
+                placeholderTextColor='#cccccc'
+                keyboardType="numeric"
+                value={ano}
+                onChangeText={setAno}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Cor'
+                placeholderTextColor='#cccccc'
+                value={cor}
+                onChangeText={setCor}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Quilómetros'
+                placeholderTextColor='#cccccc'
+                keyboardType="numeric"
+                value={quilometros}
+                onChangeText={setQuilometros}
+            />
 
             <TouchableOpacity style={styles.buttonAdd} onPress={handleCarData}>
                 <Text style={styles.buttonText}>Adicionar</Text>
