@@ -43,9 +43,6 @@ export default function CarListScreen() {
                             <Text style={styles.carText}>Matrícula: {item[0]}</Text>
                             <Text style={styles.carText}>Marca: {item[1].marca}</Text>
                             <Text style={styles.carText}>Modelo: {item[1].modelo}</Text>
-                            <Text style={styles.carText}>Ano: {item[1].ano}</Text>
-                            <Text style={styles.carText}>Cor: {item[1].cor}</Text>
-                            <Text style={styles.carText}>Quilómetros: {item[1].quilometros} km</Text>
                         </View>
                     )}
                 />
