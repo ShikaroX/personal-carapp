@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
