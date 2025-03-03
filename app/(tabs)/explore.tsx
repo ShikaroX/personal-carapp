@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// @ts-ignore
+import { useRouter } from 'expo-router';
+
 interface Carro {
     marca: string;
     modelo: string;
@@ -10,6 +13,7 @@ interface Carro {
 }
 
 export default function CarListScreen() {
+    const router = useRouter();
     const [carros, setCarros] = useState<[string, Carro][]>([]); 
 
     const getStoredCars = async () => {
@@ -40,9 +44,11 @@ export default function CarListScreen() {
                     keyExtractor={(item) => item[0]} 
                     renderItem={({ item }) => (
                         <View style={styles.carItem}>
-                            <Text style={styles.carText}>Matrícula: {item[0]}</Text>
-                            <Text style={styles.carText}>Marca: {item[1].marca}</Text>
-                            <Text style={styles.carText}>Modelo: {item[1].modelo}</Text>
+                            <TouchableOpacity onPress={() => router.push('/screens/carInfo')}>
+                                <Text style={styles.carText}>Matrícula: {item[0]}</Text>
+                                <Text style={styles.carText}>Marca: {item[1].marca}</Text>
+                                <Text style={styles.carText}>Modelo: {item[1].modelo}</Text>
+                            </TouchableOpacity>
                         </View>
                     )}
                 />
