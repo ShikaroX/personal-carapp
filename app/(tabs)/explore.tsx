@@ -7,9 +7,6 @@ import { useRouter } from 'expo-router';
 interface Carro {
     marca: string;
     modelo: string;
-    ano: number;
-    cor: string;
-    quilometros: number;
 }
 
 export default function CarListScreen() {
@@ -44,7 +41,7 @@ export default function CarListScreen() {
                     keyExtractor={(item) => item[0]} 
                     renderItem={({ item }) => (
                         <View style={styles.carItem}>
-                            <TouchableOpacity onPress={() => router.push('/screens/carInfo')}>
+                            <TouchableOpacity onPress={() => router.push({ pathname: '/screens/carInfo', params: { matricula: item[0] } })}>
                                 <Text style={styles.carText}>Matrícula: {item[0]}</Text>
                                 <Text style={styles.carText}>Marca: {item[1].marca}</Text>
                                 <Text style={styles.carText}>Modelo: {item[1].modelo}</Text>
